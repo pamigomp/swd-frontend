@@ -38,7 +38,7 @@
             }
         ];
 
-        vm.objectiveFunctions = [
+        var objectiveFunctions = [
             {
                 "name": "Minimalizacja kosztu zakupu produktów",
                 "value": 1
@@ -48,21 +48,23 @@
                 "value": 2
             },
             {
-                "name": "Minimalizacja ilości witamin zakupionych produktów",
+                "name": "Minimalizacja ilości witamin w zakupionych produktach",
                 "value": 3
             }
         ];
 
-        vm.parameters.objectiveFunctionsOrder = vm.objectiveFunctions;
+        vm.objectiveFunctionsTemp = angular.copy(objectiveFunctions);
 
         function clear() {
-            vm.parameters = '';
+            vm.objectiveFunctionsTemp = angular.copy(objectiveFunctions);
+            vm.parameters = {};
             vm.resultsList = '';
         }
 
         function calculate() {
             vm.errorCalculate = false;
             vm.submitting = true;
+            vm.parameters.objectiveFunctions = vm.objectiveFunctionsTemp;
             problemsService.calculate(vm.parameters)
                     .then(calculateSuccess, calculateFailure);
 
