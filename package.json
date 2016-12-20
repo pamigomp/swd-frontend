@@ -15,15 +15,15 @@
         "node",
         "express"
     ],
-    "homepage": "https://github.com/pamigomp/problem-mieszanek",
+    "homepage": "https://github.com/pamigomp/swdFrontend",
     "bugs": {
-        "url": "https://github.com/pamigomp/problem-mieszanek/issues"
+        "url": "https://github.com/pamigomp/swdFrontend/issues"
     },
     "license": "MIT",
     "author": "Michal Pietrzak",
     "repository": {
         "type": "git",
-        "url": "https://github.com/pamigomp/problem-mieszanek.git"
+        "url": "https://github.com/pamigomp/swdFrontend.git"
     },
     "main": "server.js",
     "scripts": {
@@ -40,32 +40,32 @@
         "protractor": "./node_modules/.bin/protractor protractor.conf.js"
     },
     "dependencies": {
-        "bower": "^1.7.9",
+        "bower": "^1.8.0",
         "express": "^4.14.0"
     },
     "devDependencies": {
-        "bower": "^1.7.9",
-        "coveralls": "^2.11.12",
+        "bower": "^1.8.0",
+        "coveralls": "^2.11.15",
         "grunt": "^1.0.1",
         "grunt-contrib-concat": "^1.0.1",
-        "grunt-contrib-jshint": "^1.0.0",
+        "grunt-contrib-jshint": "^1.1.0",
         "grunt-contrib-uglify": "^2.0.0",
         "grunt-contrib-watch": "^1.0.0",
         "grunt-jscs": "^3.0.1",
         "grunt-karma": "^2.0.0",
         "grunt-protractor-runner": "^3.2.0",
-        "jasmine-core": "^2.4.1",
+        "jasmine-core": "^2.5.2",
         "jasmine-reporters": "^2.2.0",
-        "karma": "^1.2.0",
+        "karma": "^1.3.0",
         "karma-chrome-launcher": "^2.0.0",
         "karma-coverage": "^1.1.1",
         "karma-firefox-launcher": "^1.0.0",
-        "karma-jasmine": "^1.0.2",
-        "karma-junit-reporter": "^1.1.0",
-        "karma-phantomjs-launcher": "^1.0.1",
+        "karma-jasmine": "^1.1.0",
+        "karma-junit-reporter": "^1.2.0",
+        "karma-phantomjs-launcher": "^1.0.2",
         "load-grunt-tasks": "^3.5.2",
-        "phantomjs-prebuilt": "^2.1.12",
-        "protractor": "^4.0.4",
+        "phantomjs-prebuilt": "^2.1.14",
+        "protractor": "^4.0.13",
         "selenium-webdriver": "^2.53.3"
     },
     "engines": {
