@@ -5,9 +5,9 @@
 
             .controller('MixProbController', MixProbController);
 
-    MixProbController.$inject = ['problemsService', '$scope'];
+    MixProbController.$inject = ['problemsService'];
 
-    function MixProbController(problemsService, $scope) {
+    function MixProbController(problemsService) {
         var vm = this;
 
         vm.parameters = {};
@@ -37,16 +37,7 @@
                 "description": "Aktywność powyżej 300 minut tygodniowo"
             }
         ];
-        var tmpList = [];
 
-        for (var i = 1; i <= 6; i++) {
-            tmpList.push({
-                text: 'Item ' + i,
-                value: i
-            });
-        }
-
-        $scope.list = tmpList;
         vm.objectiveFunctions = [
             {
                 "name": "Minimalizacja kosztu zakupu produktów",

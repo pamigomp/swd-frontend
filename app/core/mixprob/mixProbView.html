@@ -21,19 +21,12 @@
             </div>
             <div class="form-group has-feedback">
                 <label class="control-label" for="objectiveFunctionsOrder">Kolejność funkcji celu:</label>
-                <ul name="objectiveFunctions" ui-sortable ng-model="MPC.objectiveFunctions" class="list-group">
+                <ul name="objectiveFunctions" ui-sortable ng-model="MPC.parameters.objectiveFunctionsOrder" class="list-group">
                     <li ng-repeat="objectiveFunction in MPC.objectiveFunctions" class="list-group-item">
                         {{$index + 1}} {{objectiveFunction.name}}
                     </li>
                 </ul>
             </div>
-    <div class="floatleft">
-    <ul ui-sortable ng-model="list" class="list">
-      <li ng-repeat="item in list" class="item">
-        {{item.text}}
-      </li>
-    </ul>
-  </div>
         </form>
     </div>
 </div>
