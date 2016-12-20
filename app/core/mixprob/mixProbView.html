@@ -1,0 +1,99 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Dane wejściowe</h3>
+    </div>
+    <div class="panel-body">
+        <form name="MixProbForm">
+            <div class="form-group has-feedback" data-ng-class="MixProbForm.age.$valid ? 'has-success' : (MixProbForm.age.$pristine ? '' : 'has-error')">
+                <label class="control-label" for="age">Wiek:</label>
+                <input id="age" name="age" type="number" min="0" max="125" data-ng-model="MPC.parameters.age" class="form-control" required />
+                <span class="glyphicon form-control-feedback" data-ng-class="MixProbForm.age.$valid ? 'glyphicon-ok' : (MixProbForm.age.$pristine ? '' : 'glyphicon-remove')"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label" for="gender">Płeć:</label>
+                <input id="male" name="gender" type="radio" data-ng-model="MPC.parameters.gender" value="M" class="radio radio-inline" data-ng-required="!MPC.parameters.gender"/>mężczyzna
+                <input id="female" name="gender" type="radio" data-ng-model="MPC.parameters.gender" value="K" class="radio radio-inline" data-ng-required="!MPC.parameters.gender"/>kobieta
+            </div>
+            <div class="form-group has-feedback" data-ng-class="MixProbForm.physicalActivity.$valid ? 'has-success' : (MixProbForm.physicalActivity.$pristine ? '' : 'has-error')">
+                <label class="control-label" for="physicalActivity">Aktywność fizyczna:</label>
+                <select id="physical-activity" class="form-control" name="physicalActivity" data-ng-model="MPC.parameters.physicalActivity" data-ng-options="activity.value as activity.name for activity in MPC.physicalActivities" required></select>
+                <em data-ng-show='MPC.parameters.physicalActivity.description'><strong>Opis: </strong>{{MPC.parameters.physicalActivity.description}}</em>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label" for="objectiveFunctionsOrder">Kolejność funkcji celu:</label>
+                <ul name="objectiveFunctions" ui-sortable ng-model="MPC.objectiveFunctions" class="list-group">
+                    <li ng-repeat="objectiveFunction in MPC.objectiveFunctions" class="list-group-item">
+                        {{$index + 1}} {{objectiveFunction.name}}
+                    </li>
+                </ul>
+            </div>
+    <div class="floatleft">
+    <ul ui-sortable ng-model="list" class="list">
+      <li ng-repeat="item in list" class="item">
+        {{item.text}}
+      </li>
+    </ul>
+  </div>
+        </form>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body" style="text-align: center;">
+        <button id="calculate-btn" class="btn btn-success" data-ng-show="!MPC.submitting" data-ng-click="MPC.calculate(MPC.parameters)" data-ng-disabled="MixProbForm.$invalid">
+            Oblicz <span class="glyphicon glyphicon-cloud"></span></button>
+        <button id="clear-btn" class="btn btn-danger" data-ng-show="!MPC.submitting" data-ng-click="MPC.clear()">
+            Wyczyść <span class="glyphicon glyphicon-remove"></span></button>
+        <p data-ng-show="MPC.submitting"><i class="glyphicon glyphicon-repeat fast-right-spinner"></i></p>
+    </div>
+</div>
+<div class="panel panel-default" data-ng-hide="!MPC.resultsList">
+    <div class="panel-heading">
+        <h3 class="panel-title">Wyniki</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-2 frame">
+                <div class="row" style="text-align: center; font-weight: bold;">Chleb żytni</div>
+                <div class="row frame" style="height: 138px;">
+                    <img class="helper" src="./assets/images/chleb.png" alt="chleb" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountBread}} g</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row" style="text-align: center; font-weight: bold;">Mleko 2%</div>
+                <div class="row frame" style="height: 138px;">
+                    <img src="./assets/images/mleko.png" alt="mleko" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountMilk}} g</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row" style="text-align: center; font-weight: bold;">Pierś z kurczaka</div>
+                <div class="row frame" style="height: 138px;">
+                    <img src="./assets/images/kurczak.png" alt="kurczak" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountChicken}} g</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row" style="text-align: center; font-weight: bold;">Czekolada mleczna</div>
+                <div class="row frame" style="height: 138px;">
+                    <img src="./assets/images/czekolada.png" alt="czekolada" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountChocolate}} g</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row" style="text-align: center; font-weight: bold;">Pomarańcza</div>
+                <div class="row frame" style="height: 138px;">
+                    <img src="./assets/images/pomarancza.png" alt="pomarancza" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountOrange}} g</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row" style="text-align: center; font-weight: bold;">Marchew</div>
+                <div class="row frame" style="height: 138px;">
+                    <img src="./assets/images/marchew.png" alt="marchew" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountCarrot}} g</div>
+            </div>
+        </div>
+    </div>
+</div>
