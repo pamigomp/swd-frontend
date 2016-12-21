@@ -22,8 +22,8 @@
                 deferred.resolve(problemResult.data);
             }
 
-            function calculateFailure() {
-                deferred.reject();
+            function calculateFailure(error) {
+                deferred.reject(error.data);
             }
 
             return deferred.promise;

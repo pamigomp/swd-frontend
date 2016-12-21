@@ -6,7 +6,7 @@
         <form name="MixProbForm">
             <div class="form-group has-feedback" data-ng-class="MixProbForm.age.$valid ? 'has-success' : (MixProbForm.age.$pristine ? '' : 'has-error')">
                 <label class="control-label" for="age">Wiek:</label>
-                <input id="age" name="age" type="number" min="0" max="125" data-ng-model="MPC.parameters.age" class="form-control" required />
+                <input id="age" name="age" type="number" min="1" max="125" data-ng-model="MPC.parameters.age" class="form-control" required />
                 <span class="glyphicon form-control-feedback" data-ng-class="MixProbForm.age.$valid ? 'glyphicon-ok' : (MixProbForm.age.$pristine ? '' : 'glyphicon-remove')"></span>
             </div>
             <div class="form-group has-feedback">
@@ -17,13 +17,16 @@
             <div class="form-group has-feedback" data-ng-class="MixProbForm.physicalActivity.$valid ? 'has-success' : (MixProbForm.physicalActivity.$pristine ? '' : 'has-error')">
                 <label class="control-label" for="physicalActivity">Aktywność fizyczna:</label>
                 <select id="physical-activity" class="form-control" name="physicalActivity" data-ng-model="MPC.parameters.physicalActivity" data-ng-options="activity.value as activity.name for activity in MPC.physicalActivities" required></select>
-                <em data-ng-show='MPC.parameters.physicalActivity.description'><strong>Opis: </strong>{{MPC.parameters.physicalActivity.description}}</em>
+                <em data-ng-show='MPC.parameters.physicalActivity === "NONE"'><strong>Opis: </strong>{{MPC.physicalActivities[0].description}}</em>
+                <em data-ng-show='MPC.parameters.physicalActivity === "LOW"'><strong>Opis: </strong>{{MPC.physicalActivities[1].description}}</em>
+                <em data-ng-show='MPC.parameters.physicalActivity === "AVERAGE"'><strong>Opis: </strong>{{MPC.physicalActivities[2].description}}</em>
+                <em data-ng-show='MPC.parameters.physicalActivity === "HIGH"'><strong>Opis: </strong>{{MPC.physicalActivities[3].description}}</em>
             </div>
             <div class="form-group has-feedback">
                 <label class="control-label" for="objectiveFunctionsOrder">Kolejność funkcji celu:</label>
                 <ul name="objectiveFunctions" ui-sortable ng-model="MPC.objectiveFunctionsTemp" class="list-group">
                     <li ng-repeat="objectiveFunction in MPC.objectiveFunctionsTemp" class="list-group-item">
-                        {{$index + 1}} {{objectiveFunction.name}}
+                        {{$index + 1}} {{::objectiveFunction.name}}
                     </li>
                 </ul>
             </div>
@@ -39,9 +42,12 @@
         <p data-ng-show="MPC.submitting"><i class="glyphicon glyphicon-repeat fast-right-spinner"></i></p>
     </div>
 </div>
-<div class="panel panel-default" data-ng-hide="!MPC.resultsList">
+<div class="alert alert-danger" role="alert" data-ng-show="MPC.errorCalculate">
+    <strong>Błąd!</strong> Wystąpił problem podczas wykonywania algorytmu. ({Przyczyna: <strong>{{::MPC.errorMessage.message}}</strong>)
+</div>
+<div class="panel panel-default" data-ng-hide="!MPC.aprioriResults">
     <div class="panel-heading">
-        <h3 class="panel-title">Wyniki</h3>
+        <h3 class="panel-title">Wyniki - algorytm apriori</h3>
     </div>
     <div class="panel-body">
         <div class="row">
@@ -50,42 +56,93 @@
                 <div class="row frame" style="height: 138px;">
                     <img class="helper" src="./assets/images/chleb.png" alt="chleb" width="190">
                 </div>
-                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountBread}} g</div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountBread | number : 2}} g</div>
             </div>
             <div class="col-lg-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Mleko 2%</div>
                 <div class="row frame" style="height: 138px;">
                     <img src="./assets/images/mleko.png" alt="mleko" width="190">
                 </div>
-                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountMilk}} g</div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountMilk | number : 2}} g</div>
             </div>
             <div class="col-lg-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Pierś z kurczaka</div>
                 <div class="row frame" style="height: 138px;">
                     <img src="./assets/images/kurczak.png" alt="kurczak" width="190">
                 </div>
-                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountChicken}} g</div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountChicken | number : 2}} g</div>
             </div>
             <div class="col-lg-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Czekolada mleczna</div>
                 <div class="row frame" style="height: 138px;">
                     <img src="./assets/images/czekolada.png" alt="czekolada" width="190">
                 </div>
-                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountChocolate}} g</div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountChocolate | number : 2}} g</div>
             </div>
             <div class="col-lg-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Pomarańcza</div>
                 <div class="row frame" style="height: 138px;">
                     <img src="./assets/images/pomarancza.png" alt="pomarancza" width="190">
                 </div>
-                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountOrange}} g</div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountOrange | number : 2}} g</div>
             </div>
             <div class="col-lg-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Marchew</div>
                 <div class="row frame" style="height: 138px;">
                     <img src="./assets/images/marchew.png" alt="marchew" width="190">
                 </div>
-                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.resultsList.amountCarrot}} g</div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountCarrot | number : 2}} g</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" data-ng-hide="!MPC.nonpreferentialResults">
+    <div class="panel-heading">
+        <h3 class="panel-title">Wyniki - algorytm niepreferencyjny</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-2 frame">
+                <div class="row" style="text-align: center; font-weight: bold;">Chleb żytni</div>
+                <div class="row frame" style="height: 138px;">
+                    <img class="helper" src="./assets/images/chleb.png" alt="chleb" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountBread | number : 2}} g</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row" style="text-align: center; font-weight: bold;">Mleko 2%</div>
+                <div class="row frame" style="height: 138px;">
+                    <img src="./assets/images/mleko.png" alt="mleko" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountMilk | number : 2}} g</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row" style="text-align: center; font-weight: bold;">Pierś z kurczaka</div>
+                <div class="row frame" style="height: 138px;">
+                    <img src="./assets/images/kurczak.png" alt="kurczak" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountChicken | number : 2}} g</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row" style="text-align: center; font-weight: bold;">Czekolada mleczna</div>
+                <div class="row frame" style="height: 138px;">
+                    <img src="./assets/images/czekolada.png" alt="czekolada" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountChocolate | number : 2}} g</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row" style="text-align: center; font-weight: bold;">Pomarańcza</div>
+                <div class="row frame" style="height: 138px;">
+                    <img src="./assets/images/pomarancza.png" alt="pomarancza" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountOrange | number : 2}} g</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row" style="text-align: center; font-weight: bold;">Marchew</div>
+                <div class="row frame" style="height: 138px;">
+                    <img src="./assets/images/marchew.png" alt="marchew" width="190">
+                </div>
+                <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountCarrot | number : 2}} g</div>
             </div>
         </div>
     </div>

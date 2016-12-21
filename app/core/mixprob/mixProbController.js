@@ -11,7 +11,8 @@
         var vm = this;
 
         vm.parameters = {};
-        vm.resultsList;
+        vm.aprioriResults;
+        vm.nonpreferentialResults;
         vm.clear = clear;
         vm.calculate = calculate;
 
@@ -58,10 +59,13 @@
         function clear() {
             vm.objectiveFunctionsTemp = angular.copy(objectiveFunctions);
             vm.parameters = {};
-            vm.resultsList = '';
+            vm.aprioriResults = '';
+            vm.nonpreferentialResults = '';
         }
 
         function calculate() {
+            vm.aprioriResults = '';
+            vm.nonpreferentialResults = '';
             vm.errorCalculate = false;
             vm.submitting = true;
             vm.parameters.objectiveFunctions = vm.objectiveFunctionsTemp;
@@ -69,12 +73,14 @@
                     .then(calculateSuccess, calculateFailure);
 
             function calculateSuccess(resultsList) {
-                vm.resultsList = resultsList;
+                vm.aprioriResults = resultsList[0];
+                vm.nonpreferentialResults = resultsList[1];
                 vm.errorCalculate = false;
                 vm.submitting = false;
             }
 
-            function calculateFailure() {
+            function calculateFailure(errorData) {
+                vm.errorMessage = errorData;
                 vm.errorCalculate = true;
                 vm.submitting = false;
             }
