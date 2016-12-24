@@ -43,7 +43,7 @@
     </div>
 </div>
 <div class="alert alert-danger" role="alert" data-ng-show="MPC.errorCalculate">
-    <strong>Błąd!</strong> Wystąpił problem podczas wykonywania algorytmu. ({Przyczyna: <strong>{{::MPC.errorMessage.message}}</strong>)
+    <strong>Błąd!</strong> Wystąpił problem podczas wykonywania algorytmu. (Przyczyna: <strong>{{MPC.errorMessage.message}}</strong>)
 </div>
 <div class="panel panel-default" data-ng-hide="!MPC.aprioriResults">
     <div class="panel-heading">
@@ -51,44 +51,44 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-lg-2 frame">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Chleb żytni</div>
-                <div class="row frame" style="height: 138px;">
-                    <img class="helper" src="./assets/images/chleb.png" alt="chleb" width="190">
+                <div class="row" style="height: 138px;">
+                    <img src="./assets/images/chleb.png" alt="chleb" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountBread | number : 2}} g</div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Mleko 2%</div>
-                <div class="row frame" style="height: 138px;">
+                <div class="row" style="height: 138px;">
                     <img src="./assets/images/mleko.png" alt="mleko" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountMilk | number : 2}} g</div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Pierś z kurczaka</div>
-                <div class="row frame" style="height: 138px;">
+                <div class="row" style="height: 138px;">
                     <img src="./assets/images/kurczak.png" alt="kurczak" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountChicken | number : 2}} g</div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Czekolada mleczna</div>
-                <div class="row frame" style="height: 138px;">
+                <div class="row" style="height: 138px;">
                     <img src="./assets/images/czekolada.png" alt="czekolada" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountChocolate | number : 2}} g</div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Pomarańcza</div>
-                <div class="row frame" style="height: 138px;">
+                <div class="row" style="height: 138px;">
                     <img src="./assets/images/pomarancza.png" alt="pomarancza" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountOrange | number : 2}} g</div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Marchew</div>
-                <div class="row frame" style="height: 138px;">
+                <div class="row" style="height: 138px;">
                     <img src="./assets/images/marchew.png" alt="marchew" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.aprioriResults.amountCarrot | number : 2}} g</div>
@@ -102,44 +102,44 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-lg-2 frame">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Chleb żytni</div>
-                <div class="row frame" style="height: 138px;">
-                    <img class="helper" src="./assets/images/chleb.png" alt="chleb" width="190">
+                <div class="row" style="height: 138px;">
+                    <img src="./assets/images/chleb.png" alt="chleb" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountBread | number : 2}} g</div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Mleko 2%</div>
-                <div class="row frame" style="height: 138px;">
+                <div class="row" style="height: 138px;">
                     <img src="./assets/images/mleko.png" alt="mleko" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountMilk | number : 2}} g</div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Pierś z kurczaka</div>
-                <div class="row frame" style="height: 138px;">
+                <div class="row" style="height: 138px;">
                     <img src="./assets/images/kurczak.png" alt="kurczak" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountChicken | number : 2}} g</div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Czekolada mleczna</div>
-                <div class="row frame" style="height: 138px;">
+                <div class="row" style="height: 138px;">
                     <img src="./assets/images/czekolada.png" alt="czekolada" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountChocolate | number : 2}} g</div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Pomarańcza</div>
-                <div class="row frame" style="height: 138px;">
+                <div class="row" style="height: 138px;">
                     <img src="./assets/images/pomarancza.png" alt="pomarancza" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountOrange | number : 2}} g</div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <div class="row" style="text-align: center; font-weight: bold;">Marchew</div>
-                <div class="row frame" style="height: 138px;">
+                <div class="row" style="height: 138px;">
                     <img src="./assets/images/marchew.png" alt="marchew" width="190">
                 </div>
                 <div class="row" style="text-align: center; font-weight: bold;">Ilość: {{100 * MPC.nonpreferentialResults.amountCarrot | number : 2}} g</div>

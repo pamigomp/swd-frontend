@@ -38,3 +38,8 @@
         transform: rotate(359deg);
     }
 }
+
+img {
+    width: 100%;
+    height: auto;
+}
